@@ -1,21 +1,42 @@
-//
-//  ContentView.swift
-//  ScrollView
-//
-//  Created by 渡邊魁優 on 2022/10/31.
-//
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            ScrollView {
+                VStack {
+                    HStack {
+                        NumberViewModel(Number: 1, numberColor: .red)
+                        NumberViewModel(Number: 2, numberColor: .blue)
+                        NumberViewModel(Number: 3, numberColor: .green)
+                        NumberViewModel(Number: 4, numberColor: .yellow)
+                        NumberViewModel(Number: 5, numberColor: .gray)
+                        NumberViewModel(Number: 6, numberColor: .purple)
+                    }
+                    ForEach(0..<30) {
+                        Text("\($0 + 1)行目")
+                            .font(.largeTitle)
+                    }
+                }
+            }
         }
-        .padding()
+    }
+}
+
+struct NumberViewModel: View {
+    let Number: Int
+    let numberColor: Color
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "die.face.\(Number)")
+                .resizable()
+            .frame(width: 150, height: 150)
+            Text("\(Number)")
+                .font(.title)
+                .foregroundColor(numberColor)
+        }
     }
 }
 
